@@ -1,0 +1,34 @@
+version: '3.8'
+
+networks:
+  hw1-network:
+    driver: bridge
+
+services:
+  rest-service:
+    build: .
+    container_name: HW1-REST-Service
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db-service:5432/hw1"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db-service:
+        condition: service_healthy
+
+  db-service:
+    image: postgres:16.4-alpine
+    restart: always
+    container_name: HW1-DB
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -q -U anotheruser -d anotherdb" ]
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: hw1
+    volumes:
+      - /home/log/process-track/database/pgdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"

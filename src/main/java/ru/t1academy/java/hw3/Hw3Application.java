@@ -1,4 +1,4 @@
-package ru.t1academy.hw3;
+package ru.t1academy.java.hw3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
