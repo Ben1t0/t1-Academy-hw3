@@ -10,8 +10,6 @@ public interface UserService {
 
     List<ReturnUserDto> getAll();
 
-    ReturnUserDto addUser(UserDto userDto);
-
     ReturnUserDto updateUser(long userId, UserDto userDto);
 
     void deleteUser(long userId);

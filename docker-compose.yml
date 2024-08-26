@@ -7,11 +7,15 @@ networks:
 services:
   rest-service:
     build: .
-    container_name: HW1-REST-Service
+    container_name: HW3-REST-Service
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://db-service:5432/hw1"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db-service:5432/hw3"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
+      JWT_ACCESS_EXPIRATION_MS: 900000
+      JWT_REFRESH_EXPIRATION_MS: 1296000000
+      JWT_SECRET_ACCESS: qs5T4iesLQ9D+0VTiXrGqUDEgsVvrP3o/c1aam0vX0E=
+      JWT_SECRET_REFRESH: R14CmRynq7dpgNbBJSABwFThq0Sa/SAG0BlUOdn3XKc=
     ports:
       - "8080:8080"
     depends_on:
@@ -21,7 +25,7 @@ services:
   db-service:
     image: postgres:16.4-alpine
     restart: always
-    container_name: HW1-DB
+    container_name: HW3-DB
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -q -U anotheruser -d anotherdb" ]
     environment:

@@ -1,6 +1,7 @@
 package ru.t1academy.java.hw3.dto.user;
 
 import org.springframework.stereotype.Service;
+import ru.t1academy.java.hw3.model.Role;
 import ru.t1academy.java.hw3.model.User;
 
 @Service
@@ -10,15 +11,10 @@ public class UserMapper {
         return ReturnUserDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
-                .name(user.getName())
-                .build();
-    }
-
-    public User fromDto(UserDto userDto) {
-        if (userDto == null) return null;
-        return User.builder()
-                .email(userDto.email())
-                .name(userDto.name())
+                .username(user.getUsername())
+                .roles(user.getRoles().stream()
+                        .map(Role::name)
+                        .toList())
                 .build();
     }
 }
