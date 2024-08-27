@@ -1,7 +1,7 @@
 version: '3.8'
 
 networks:
-  hw1-network:
+  hw3-network:
     driver: bridge
 
 services:
@@ -31,8 +31,8 @@ services:
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: hw1
+      POSTGRES_DB: hw3
     volumes:
-      - /home/log/process-track/database/pgdata:/var/lib/postgresql/data/
+      - /var/lib/postgresql/data/
     ports:
-      - "5432:5432"
+      - "6543:5432"
